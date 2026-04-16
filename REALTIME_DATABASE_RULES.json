@@ -1,0 +1,55 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || root.child('adminUsers').child(auth.uid).val() === true)",
+        ".write": "auth.uid == $uid || root.child('adminUsers').child(auth.uid).val() === true",
+        ".validate": "newData.hasChildren(['email', 'name'])"
+      }
+    },
+    "orders": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || root.child('adminUsers').child(auth.uid).val() === true)",
+        ".write": "auth != null && (auth.uid == $uid || root.child('adminUsers').child(auth.uid).val() === true)",
+        "$orderId": {
+          ".validate": "newData.hasChildren(['plan', 'amount', 'status'])"
+        }
+      }
+    },
+    "referrals": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$refId": {
+        ".validate": "newData.hasChildren(['referrerId', 'referredUserId'])"
+      }
+    },
+    "config": {
+      ".read": "auth != null",
+      ".write": "root.child('adminUsers').child(auth.uid).val() === true"
+    },
+    "admin_settings": {
+      ".read": "auth != null",
+      ".write": "root.child('adminUsers').child(auth.uid).val() === true",
+      "payment": {
+        ".validate": "newData.hasChildren(['methodName', 'instructions', 'accountInfo'])"
+      },
+      "socialMedia": {
+        ".validate": "newData.hasChildren(['youtube', 'instagram', 'facebook', 'tiktok', 'twitter', 'telegram'])"
+      }
+    },
+    "notifications": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "plans": {
+      ".read": true,
+      ".write": "root.child('adminUsers').child(auth.uid).val() === true"
+    },
+    "adminUsers": {
+      ".read": "auth != null",
+      ".write": false
+    },
+    ".read": false,
+    ".write": false
+  }
+}

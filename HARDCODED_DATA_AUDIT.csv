@@ -1,0 +1,25 @@
+id,file,lines,category,data_type,item_count,description,example_values,priority,duplicate_with,action_required
+1,src/lib/init-firebase-data.ts,4-35,IPTV Plans,Object with 3 properties,3 plans,IPTV subscription plans with pricing,"1-month: $20, 6-month: $65, 12-month: $95",P1,,Migrate to Firestore plans collection
+2,src/app/earn/page.tsx,19-40,Referral Tiers,Array of objects,3 tiers,Referral tier rewards and bonuses,"2 refs (1M), 5 refs (6M), 10 refs (12M)",P1,,Migrate to Firestore referralTiers collection
+3,src/app/dashboard/page.tsx,51-73,Reviews,Array of objects,3 reviews,Customer testimonials - Dashboard,"Ahmed Hassan, Sarah Johnson, Marco Silva",P2,#5,Merge both sets into Firestore reviews collection
+4,src/app/dashboard/page.tsx,76-110,FAQs,Array of objects,6 questions,FAQ content - Dashboard,"Getting started, Cancellation, Devices, Referral, Trial, Withdrawal",P2,#6,Merge both sets into Firestore faqs collection
+5,src/app/support/page.tsx,27-50,Reviews,Array of objects,3 reviews,Customer testimonials - Support,"Ahmed Hassan, Maria Rodriguez, John Smith",P2,#3,Merge both sets into Firestore reviews collection
+6,src/app/support/page.tsx,52-86,FAQs,Array of objects,6 questions,FAQ content - Support,"Security, Payment methods, Refund, Devices, Issues, Legal",P2,#4,Merge both sets into Firestore faqs collection
+7,src/app/iptv/page.tsx,22-25,Payment Methods,Array of objects,4 methods,Payment gateway options,"Remitly, Binance, PayPal, CashApp",P1,#8#9#10,Consolidate all duplicates into src/lib/constants/paymentMethods.ts
+8,src/app/payment/page.tsx,15-32,Payment Details,Object with 4 keys,4 methods,Payment method instructions and account info,"Remitly, Binance, PayPal, CashApp with instructions",P1,#7#9#10,Consolidate into Firestore paymentMethods collection
+9,src/app/payment/page.tsx,65-68,Payment Methods,Array of objects,4 methods,Payment gateway options (duplicate of #7),"Remitly, Binance, PayPal, CashApp",P1,#7#8#10,Remove - use consolidated constant
+10,src/app/new-payment/page.tsx,37-40,Payment Methods,Array of objects,4 methods,Payment gateway options (duplicate of #7),"Remitly, Binance, PayPal, CashApp",P1,#7#8#9,Remove - use consolidated constant
+11,src/app/iptv/page.tsx,5-18,Devices,Array of objects,8 devices,Supported IPTV devices,"Smart TV, Firestick, Android Box, Mobile, Laptop, Tablet, MAG Box, PC",P2,,Migrate to src/lib/constants/devices.ts
+12,src/app/home-repair/page.tsx,31-57,Home Services,Array of objects,6 services,Home repair service categories,"Locksmith, Tree Trimming, Roofing, Plumbing, Electrician, Custom",P2,,Migrate to Firestore services collection
+13,src/app/home-repair/page.tsx,59-65,Team Stories,Array of objects,5 people,Team member profiles with ratings,"Mike Johnson (4.9), Sarah Davis (4.8), Tom Wilson (4.95), Lisa Brown (4.85), John Smith (4.9)",P2,,Migrate to Firestore team collection
+14,src/app/home-repair/page.tsx,67,Contact Phone,String constant,1,Home repair service phone number,"+1 (555) 123-4567",P3,,Store in src/lib/constants/contactInfo.ts
+15,src/app/home-repair/page.tsx,70,US Cities,Array of strings,10 cities,US cities for home repair service,"New York, Los Angeles, Chicago, Houston, Phoenix, Philadelphia, San Antonio, San Diego, Dallas, San Jose",P3,,Migrate to Firestore locations collection
+16,src/app/home-repair/page.tsx,71,UK Cities,Array of strings,10 cities,UK cities for home repair service,"London, Manchester, Birmingham, Leeds, Glasgow, Sheffield, Bristol, Edinburgh, Liverpool, Newcastle",P3,,Migrate to Firestore locations collection
+17,src/app/dashboard/page.tsx,43-46,Dashboard Services,Array of objects,4 services,Main dashboard service cards,"IPTV Services, Home Repair, Earn Program, Custom Products",P2,,Extract to src/app/lib/constants/dashboardServices.ts
+18,src/components/whatsapp-button.tsx,18,Contact WhatsApp,String URL,1,WhatsApp contact link,https://wa.me/1234567890,P3,,Store in src/lib/constants/contactInfo.ts
+19,src/lib/firebase-service.ts,416,Support Email,String,1,Support email address,support@primexstream.com,P3,,Store in src/lib/constants/contactInfo.ts
+20,src/lib/firebase-service.ts,417,Support Phone,String,1,Support phone number,+1234567890,P3,,Store in src/lib/constants/contactInfo.ts
+21,src/app/earn/page.tsx,65,Default Referral Code,String fallback,1,Fallback referral code for demo users,DEMO123,P3,,Keep as fallback or use user.referralCode
+22,src/app/earn/page.tsx,66,Referral Link,String template,1,Referral link URL template,"https://primexstream.pro?ref={code}",P3,,Move to src/lib/constants/appConfig.ts
+23,src/lib/firebase-config.ts,6-14,Firebase Config,Object,9 keys,Firebase initialization configuration,"apiKey, authDomain, databaseURL, projectId, etc.",P3,,Already using env variables - ✅ No action needed
+24,src/lib/firebase-service.ts,333-432,Config Interface,TypeScript Interface,~25 fields,ConfigData interface defining site configuration,"Site settings, Orders, Plans, Referral, Payment methods",P2,,Create Firestore config document schema
